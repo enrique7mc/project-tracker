@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Project Tracker</h1>
+        <div class="header-actions">
+            <select id="project-filter">
+                <option value="all">All Projects</option>
+            </select>
+            <button id="add-card-btn" class="btn btn-primary">+ Add Card</button>
+            <button id="export-btn" class="btn btn-secondary" title="Export data">Export</button>
+            <button id="import-btn" class="btn btn-secondary" title="Import data">Import</button>
+            <input type="file" id="import-file" accept=".json" hidden>
+        </div>
+    </header>
+    <main class="board">
+        <div class="column" data-status="backlog">
+            <div class="column-header">
+                <h2>Backlog</h2>
+                <span class="card-count" data-count="backlog">0</span>
+            </div>
+            <div class="card-list" data-status="backlog"></div>
+        </div>
+        <div class="column" data-status="in-progress">
+            <div class="column-header">
+                <h2>In Progress</h2>
+                <span class="card-count" data-count="in-progress">0</span>
+            </div>
+            <div class="card-list" data-status="in-progress"></div>
+        </div>
+        <div class="column" data-status="done">
+            <div class="column-header">
+                <h2>Done</h2>
+                <span class="card-count" data-count="done">0</span>
+            </div>
+            <div class="card-list" data-status="done"></div>
+        </div>
+    </main>
+    <div id="card-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add Card</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <form id="card-form">
+                <input type="hidden" id="card-id">
+                <div class="form-group">
+                    <label for="card-title">Title *</label>
+                    <input type="text" id="card-title" required placeholder="What needs to be done?">
+                </div>
+                <div class="form-group">
+                    <label for="card-description">Description</label>
+                    <textarea id="card-description" rows="3" placeholder="Optional details..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="card-project">Project</label>
+                    <input type="text" id="card-project" placeholder="e.g. Tazza, PicBox" list="project-suggestions">
+                    <datalist id="project-suggestions"></datalist>
+                </div>
+                <div class="form-group">
+                    <label for="card-deadline">Deadline</label>
+                    <input type="date" id="card-deadline">
+                </div>
+                <div class="form-group">
+                    <label for="card-status">Status</label>
+                    <select id="card-status">
+                        <option value="backlog">Backlog</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="delete-card-btn" class="btn btn-danger hidden">Delete</button>
+                    <div class="form-actions-right">
+                        <button type="button" class="btn btn-secondary modal-cancel">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
